@@ -21,7 +21,7 @@ createApp ({
 
     },
     methods:{
-
+        filter
     },
     computed:{
 
