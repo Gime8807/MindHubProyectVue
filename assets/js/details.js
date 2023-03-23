@@ -5,8 +5,7 @@ createApp ({
     data(){
         return{
             arrayData:[],
-            card:{},
-           
+            card:{}       
         }
     },
     created(){
@@ -15,7 +14,7 @@ createApp ({
         .then(data=>{
 
             this.arrayData =data.events
-            const id =  new URLSearchParams(location.search).get("id");
+            const id =  new URLSearchParams(location.search).get("id")
             this.card = this.arrayData.find(evento => evento._id == id) 
             console.log(this.card)
         })
