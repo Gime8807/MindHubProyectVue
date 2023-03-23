@@ -5,30 +5,25 @@ createApp ({
     data(){
         return{
             arrayData:[],
-            arrayFiltered:[],
-            categorys:[],
-            inputSearch:'',
-            checked:[],
+            card:{},
+           
         }
     },
     created(){
         fetch(url)
         .then (response =>response.json())
         .then(data=>{
-            this.arrayData = data.events.filter(evento => Date.parse(evento.date) < Date.parse(data.currentDate))
-            this.arrayFiltered = this.arrayData
-            this.categorys = [...new Set(data.events.map(function (events){return events.category}))]
+
+            this.arrayData =data.events
+            const id =  new URLSearchParams(location.search).get("id");
+            this.card = this.arrayData.find(evento => evento._id == id) 
+            console.log(this.card)
         })
         .catch(error =>console.log(error))
 
     },
     methods:{
-        filter(){
-            this.arrayFiltered= this.arrayData.filter(evento =>{
-                return (this.checked.includes(evento.category)|| this.checked.length ===0 ) && evento.name.toLowerCase().includes(this.inputSearch.toLowerCase())
-            })
-
-        }
+     
       
     },
     computed:{
