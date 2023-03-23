@@ -86,32 +86,34 @@
             <template v-if="categorys" v-for="category in categorys">
                 <label class="form-check-label text-light" for="flexCheckIndeterminate">
                     {{category}}
-                    <input class="form-check-input" type="checkbox" :value="category">
+                    <input v-on:change="filter" v-model="checked" class="form-check-input" type="checkbox" :value="category">
                 </label>
             </template>
-            
         </div>
-        <!-- !nav -->
+        <!-- !Search -->
         <div class="navbar">
             <form class="d-flex" role="search">
-            <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input v-on:keyup="filter" v-model="inputSearch" id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
         </div>   
       </div>
       <!--!Cards -->  
       <div class="d-flex flex-wrap p-5 justify-content-center">
-        <template v-for="event of arrayData.events">
+        <template v-if="arrayFiltered.length > 0" v-for="event of arrayFiltered">
             <div class="card m-3 border-3 border-dark rounded shadow p-3 mb-5 bg-body-tertiary rounded">
             <img v-bind:src="event.image" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{event.name}}</h5>
                     <p class="card-text">{{event.description}}</p>
                     <p class="d-flex text-center align-items-center">Price:{{event.price}} $</p>
-                    <a href=" " class="btn btn-warning">Details</a>
+                    <a href="" class="btn btn-warning">Details</a>
                 </div>
             </div>
         </template>
+            <div v-else>
+                <h3>There are no results for this search, try again.</h3>
+            </div>
       </div> 
     </main>
     <footer class="d-flex flex-row justify-content-between text-dark bg-opacity-25">
@@ -126,8 +128,8 @@
 
    
     <script src="./assets/js/data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
     <script src="./assets/js/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>
